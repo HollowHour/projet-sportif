@@ -1,32 +1,78 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) header('Location: login.php');
+if (empty($_SESSION['id'])) {
+  header('Location: login.php');
+  exit;
+}
 ?>
-<!DOCTYPE html><html><head><link rel="stylesheet" href="css/style.css"></head><body>
-<?php include 'header.php';?>
-<h2>Bienvenue, <?= htmlentities($_SESSION['pseudo']) ?> !</h2>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <?php include 'header.php'; ?>
+  <main>
+    <h2>Bienvenue, <?= htmlentities($_SESSION['pseudo']) ?> !</h2>
 
-<h3>Ajouter une activité</h3>
-<form id="act-form">
-  <select name="sport"><option>course</option><option>vélo</option><option>muscu</option></select><br>
-  <input name="distance" placeholder="km" required><br>
-  <input name="duration" placeholder="min" required><br>
-  <input name="calories" placeholder="cal" required><br>
-  <input name="date" type="datetime-local" required><br>
-  <button>Ajouter</button>
-</form>
-<div id="msg"></div>
+    <section>
+      <h3>Ajouter une activité</h3>
+      <form id="act-form">
+        <label for="sport">Sport</label>
+        <select name="sport" id="sport">
+          <option value="course">Course</option>
+          <option value="vélo">Vélo</option>
+          <option value="muscu">Muscu</option>
+        </select><br>
 
-<h3>Activités récentes</h3>
-<select id="filter">
-  <option value="">Tous</option>
-  <option>course</option><option>vélo</option><option>muscu</option>
-</select>
-<table border="1"><thead><tr><th>Date</th><th>Sport</th><th>Dist</th><th>Durée</th><th>Cal</th><th>User</th></tr></thead><tbody></tbody></table>
+        <label id="dist-label" for="distance">Distance (km)</label>
+        <input name="distance" id="distance" placeholder="Distance (km)" required><br>
 
-<h3>Top 5 ce mois</h3>
-<ul id="top5"></ul>
+        <label for="duration">Durée (min)</label>
+        <input name="duration" id="duration" placeholder="Durée (min)" required><br>
 
-<?php include 'footer.php';?>
-<script src="js/main.js"></script>
-</body></html>
+        <label for="calories">Calories</label>
+        <input name="calories" id="calories" placeholder="Calories" required><br>
+
+        <label for="date">Date</label>
+        <input name="date" type="datetime-local" required><br>
+
+        <button type="submit">Ajouter</button>
+      </form>
+      <div id="msg"></div>
+    </section>
+
+    <section>
+      <h3>Activités récentes</h3>
+      <select id="filter">
+        <option value="">Tous</option>
+        <option value="course">Course</option>
+        <option value="vélo">Vélo</option>
+        <option value="muscu">Muscu</option>
+      </select>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Sport</th>
+            <th>Dist./Charge</th>
+            <th>Durée</th>
+            <th>Cal</th>
+            <th>Utilisateur</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3>Top 5 (calories ce mois)</h3>
+      <ul id="top5"></ul>
+    </section>
+  </main>
+  <?php include 'footer.php'; ?>
+  <script src="js/main.js"></script>
+</body>
+</html>

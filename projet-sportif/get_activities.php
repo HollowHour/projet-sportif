@@ -1,32 +1,20 @@
 <?php
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+include 'config.php';
 header('Content-Type: application/json');
 
-include 'config.php';
-
-$sport = $_GET['sport'] ?? '';
-
-$sql  = "SELECT a.date, a.sport, a.distance, a.duration, a.calories, u.pseudo
-         FROM activities a
-         JOIN users u ON u.id = a.user_id";
-$params = [];
-if ($sport !== '') {
-  $sql .= " WHERE a.sport = ?";
-  $params[] = $sport;
+$f = $_GET['sport'] ?? '';
+$sql = "SELECT a.date,a.sport,a.distance,a.duration,a.calories,u.pseudo
+        FROM activities a
+        JOIN users u ON u.id=a.user_id";
+if ($f!=='') {
+  $f = mysqli_real_escape_string($conn,$f);
+  $sql .= " WHERE a.sport='$f'";
 }
 $sql .= " ORDER BY a.date DESC LIMIT 10";
 
-$stmt = mysqli_prepare($conn, $sql);
-if (count($params)) {
-  mysqli_stmt_bind_param($stmt, str_repeat('s', count($params)), ...$params);
-}
-mysqli_stmt_execute($stmt);
-$res = mysqli_stmt_get_result($stmt);
-
-$rows = [];
+$res = mysqli_query($conn,$sql);
+$out = [];
 while ($row = mysqli_fetch_assoc($res)) {
-  $rows[] = $row;
+  $out[] = $row;
 }
-
-echo json_encode($rows);
+echo json_encode($out);

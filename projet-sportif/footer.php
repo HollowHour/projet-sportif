@@ -1,3 +1,3 @@
 <footer>
-  <p>&copy; 20foo25 Suivi Sportif</p>
+  <p>&copy; <?= date('Y') ?> Suivi Sportif</p>
 </footer>
