@@ -7,6 +7,7 @@ if (session_status()===PHP_SESSION_NONE) {
 <nav>
   <?php if (!empty($_SESSION['id'])): ?>
     <a href="dashboard.php">Dashboard</a>
+    <a href="profil.php">Mon Profil</a>
     <a href="logout.php">Déconnexion</a>
   <?php else: ?>
     <a href="login.php">Connexion</a>
