@@ -51,12 +51,12 @@
     color: #fff;
   }
   
-  /* Conteneur principal */
+  /* Conteneur principal en grille */
   main {
     max-width: 960px;
     margin: 2rem auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 0 1rem;
   }
@@ -64,7 +64,7 @@
   /* Sections “cartes” */
   section {
     background: var(--card-bg);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   }
@@ -160,11 +160,59 @@
     background: var(--accent-light);
   }
   
+  /* Section statistiques */
+  #stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #stats select {
+    max-width: 200px;
+  }
+  #stats canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
   /* Pied de page */
   footer {
     text-align: center;
     padding: 1rem;
     color: hsl(210, 10%, 50%);
     font-size: 0.875rem;
+  }
+  
+  /* ==== Scrollable table avec header sticky ==== */
+.activities-section .table-wrapper {
+    max-height: 300px;       /* Hauteur max avant défilement */
+    overflow-y: auto;
+    margin-top: 1rem;
+  }
+  
+  .activities-section table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .activities-section thead th {
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
+    z-index: 2;
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .activities-section th,
+  .activities-section td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .activities-section tr:nth-child(even) {
+    background: hsl(210, 30%, 98%);
+  }
+  .activities-section tr:hover {
+    background: hsl(210, 30%, 90%);
   }
   
