@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
   $e = mysqli_real_escape_string($conn, $_POST['email']);
   $h = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
-  // Vérification doublon
+  // pour assurer que email ou id existe pas deja
   $r = mysqli_query($conn, 
     "SELECT 1 FROM users
      WHERE email='$e' OR pseudo='$p' LIMIT 1"

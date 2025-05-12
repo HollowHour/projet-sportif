@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     const umsg    = document.getElementById('user-msg');
     const tbody   = document.getElementById('profile-acts');
   
-    // 1) Charger et afficher les infos utilisateur
+    // afficher infos de l'user
     fetch('get_user.php')
       .then(r=>r.json())
       .then(u=>{
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
       });
   
-    // 2) Enregistrer les modifications utilisateur
+    // enregistrer les modifications a l'util
     uf.addEventListener('submit', e=>{
       e.preventDefault();
       fetch('update_user.php', {
@@ -28,14 +28,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
           ? '✅ Profil mis à jour'
           : ('❌ ' + (json.error||'Erreur'));
         if (json.success) {
-          // mettre à jour le pseudo en session pour header
+          // mettre à jour le pseudo pour header
           document.querySelector('nav a[href="dashboard.php"]').textContent =
             'Dashboard (‘' + uf.pseudo.value + '’)';
         }
       });
     });
   
-    // 3) Charger les activités de l’utilisateur
+    // charger activites de l’utilisateur
     function loadActs() {
       fetch('get_user_activities.php')
         .then(r=>r.json())
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         });
     }
   
-    // 4) Gestion de la suppression
+    // suppression
     function attachDel() {
       tbody.querySelectorAll('.del').forEach(btn=>{
         btn.addEventListener('click', ()=>{

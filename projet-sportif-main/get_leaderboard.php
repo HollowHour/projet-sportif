@@ -2,7 +2,7 @@
 include 'config.php';
 header('Content-Type: application/json');
 
-// Classement basé sur les calories cumulées
+// ranking par calories
 $sql = "
   SELECT
     u.pseudo,
@@ -14,14 +14,10 @@ $sql = "
   ORDER BY total_cal DESC
   LIMIT 5
 ";
-
+//executer la commande sql
 $res = mysqli_query($conn, $sql);
-if (!$res) {
-  // En cas d’erreur SQL, on renvoie l’erreur pour débug
-  echo json_encode(['error' => mysqli_error($conn)]);
-  exit;
-}
 
+//composer l'output en liste
 $out = [];
 while ($row = mysqli_fetch_assoc($res)) {
   $out[] = $row;

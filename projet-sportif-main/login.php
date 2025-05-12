@@ -2,12 +2,15 @@
 session_start();
 include 'config.php';
 
+//verification du email et mdp
 if ($_SERVER['REQUEST_METHOD']==='POST') {
+  //on retire l'email si il existe et le mdp
   $e = mysqli_real_escape_string($conn, $_POST['email']);
   $r = mysqli_query($conn,
     "SELECT * FROM users WHERE email='$e' LIMIT 1"
   );
   if ($u = mysqli_fetch_assoc($r)) {
+    //verification du mdp
     if (password_verify($_POST['pass'], $u['pass'])) {
       $_SESSION['id']     = $u['id'];
       $_SESSION['pseudo'] = $u['pseudo'];
@@ -29,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
   <?php include 'header.php'; ?>
   <main>
     <h2>Connexion</h2>
+    <!-- si mdp ou email existe pas -->
     <?php if(isset($error)): ?>
       <p class="error"><?= $error ?></p>
     <?php endif; ?>

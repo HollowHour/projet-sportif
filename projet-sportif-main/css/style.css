@@ -3,7 +3,7 @@
 /* Couleurs pastel et variables */
 :root {
   --bg-gradient-start: hsl(210, 30%, 95%);
-  --bg-gradient-end:   hsl(210, 40%, 90%);
+  --bg-gradient-end:   hsl(210, 45%, 75%);
   --card-bg:           #ffffff;
   --text-color:        hsl(210, 10%, 15%);
   --accent:            hsl(340, 65%, 47%);
@@ -36,12 +36,12 @@ body {
 
 /* Navigation */
 nav {
-  background: var(--accent-light);
+  background: hsl(180, 65%, 47%);
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
   position: sticky;
   top: 0;
   z-index: 10;

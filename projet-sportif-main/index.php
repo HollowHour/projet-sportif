@@ -1,4 +1,4 @@
 <?php
-// redirige vers la connexion
+// redirige vers la page connexion
 header('Location: login.php');
 exit;

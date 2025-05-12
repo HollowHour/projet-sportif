@@ -1,5 +1,5 @@
 <?php
-// On démarre la session si nécessaire
+// pour demarer la session au cas ou
 if (session_status()===PHP_SESSION_NONE) {
   session_start();
 }

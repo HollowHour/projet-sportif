@@ -1,5 +1,5 @@
 <?php
-// update_user.php
+
 session_start();
 include 'config.php';
 header('Content-Type: application/json');
@@ -13,7 +13,7 @@ $id = (int) $_SESSION['id'];
 $p  = mysqli_real_escape_string($conn, $_POST['pseudo']);
 $e  = mysqli_real_escape_string($conn, $_POST['email']);
 
-// Construire la clause SET
+
 $sets = [
   "pseudo = '$p'",
   "email  = '$e'"

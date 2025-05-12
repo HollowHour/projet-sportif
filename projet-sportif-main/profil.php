@@ -17,7 +17,7 @@ include 'config.php';
   <?php include 'header.php'; ?>
   <main>
 
-    <!-- Mes infos -->
+    <!-- Infos -->
     <section>
       <h2>Mes informations</h2>
       <form id="user-form">
@@ -29,7 +29,7 @@ include 'config.php';
       <div id="user-msg"></div>
     </section>
 
-    <!-- Mes activités -->
+    <!-- Activites -->
     <section>
       <h2>Mes activités</h2>
       <table>

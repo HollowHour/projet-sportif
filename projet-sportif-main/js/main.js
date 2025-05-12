@@ -1,9 +1,9 @@
-// js/main.js
+
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('▶️ main.js chargé');
+  console.log('main.js chargé');
 
-  // Références DOM
+  // referancess au DOM
   const fm           = document.getElementById('act-form');
   const sp           = document.getElementById('sport');
   const distLabel    = document.getElementById('dist-label');
@@ -14,59 +14,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const msg          = document.getElementById('msg');
   const metricSelect = document.getElementById('metricSelect');
   const canvasEl     = document.getElementById('activityChart');
-  if (!canvasEl) console.error('❌ #activityChart introuvable');
   const ctx     = canvasEl?.getContext('2d');
   let chart;
 
-  // Check Chart.js presence
-  if (typeof Chart === 'undefined') {
-    console.error('❌ Chart.js non chargé');
-  } else {
-    console.log('✅ Chart.js OK');
-  }
 
-  // 1. Label dynamique
+  // Label dynamic
   function updateLabel() {
-    distLabel.textContent = sp.value === 'muscu'
-      ? 'Charge (kg)'
-      : 'Distance (km)';
+    distLabel.textContent = sp.value === 'muscu' ? 'Charge (kg)' : 'Distance (km)';
     distIn.placeholder = distLabel.textContent;
   }
   sp.addEventListener('change', updateLabel);
   updateLabel();
 
-  // 2. Soumission activité
+  // Soumission d'activite
   fm.addEventListener('submit', e => {
     e.preventDefault();
-    console.log('🔄 Envoi activité via AJAX');
+    console.log('AJAX');
     fetch('save_activity.php', {
       method: 'POST',
       body: new FormData(fm)
     })
     .then(r => r.text())
     .then(txt => {
-      console.log('🛠 save_activity.php →', txt);
       msg.textContent = txt === 'ok'
-        ? '✅ Activité ajoutée'
-        : '❌ Erreur';
+        ? 'Activité ajoutée'
+        : 'Erreur';
       loadAll();
     })
-    .catch(err => console.error('❌ Erreur fetch save_activity:', err));
+    .catch(err => console.error('Erreur save_activity:', err));
   });
 
-  // 3. Filtre
+  // Filtre
   fl.addEventListener('change', loadAll);
 
-  // 4. Chargement des activités + leaderboard
+  // activités + leaderboard
   function loadAll() {
     console.log('🔄 loadAll()');
-    // Activités
+    // Activites
     let url = 'get_activities.php';
     if (fl.value) url += '?sport=' + encodeURIComponent(fl.value);
     fetch(url)
       .then(r => r.json())
       .then(data => {
-        console.log('📋 get_activities data:', data);
         tb.innerHTML = '';
         data.forEach(a => {
           const tr = document.createElement('tr');
@@ -81,13 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
           tb.appendChild(tr);
         });
       })
-      .catch(err => console.error('❌ Erreur fetch get_activities:', err));
+      .catch(err => console.error('Erreur get_activities:', err));
 
     // Leaderboard
     fetch('get_leaderboard.php')
       .then(r => r.json())
       .then(data => {
-        console.log('🏆 get_leaderboard data:', data);
         t5.innerHTML = '';
         data.forEach(u => {
           const li = document.createElement('li');
@@ -95,19 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
           t5.appendChild(li);
         });
       })
-      .catch(err => console.error('❌ Erreur fetch get_leaderboard:', err));
+      .catch(err => console.error('Erreur get_leaderboard:', err));
   }
 
   loadAll();
   setInterval(loadAll, 5000);
 
-  // 5. Graphique Chart.js
+  // Graph avec chart.js
   function loadChart() {
-    console.log('📊 loadChart()');
     fetch('get_user_activities.php')
       .then(r => r.json())
       .then(data => {
-        console.log('📈 get_user_activities data:', data);
         const now      = new Date();
         const monthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
         const recent   = data.filter(a => new Date(a.date) >= monthAgo);
@@ -152,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       })
-      .catch(err => console.error('❌ Erreur fetch get_user_activities:', err));
+      .catch(err => console.error('Erreur fetch get_user_activities:', err));
   }
 
   metricSelect.addEventListener('change', loadChart);

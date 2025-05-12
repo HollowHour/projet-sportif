@@ -17,7 +17,7 @@ if (empty($_SESSION['id'])) {
   <?php include 'header.php'; ?>
   <main>
 
-    <!-- 1. Ajouter une activité -->
+    <!-- ajout d'activ -->
     <section>
       <h3>Ajouter une activité</h3>
       <form id="act-form">
@@ -49,7 +49,7 @@ if (empty($_SESSION['id'])) {
     </section>
 
    
-    <!-- 2. Activités récentes -->
+    <!-- recentes -->
 <section class="activities-section">
   <h3>Activités récentes</h3>
   <select id="filter">
@@ -71,13 +71,13 @@ if (empty($_SESSION['id'])) {
   </div>
 </section>
 
-    <!-- 3. Top 5 -->
+    <!-- best 5 -->
     <section>
       <h3>Top 5 (calories ce mois)</h3>
       <ul id="top5"></ul>
     </section>
 
-    <!-- 4. Statistiques -->
+    <!-- stats -->
     <section id="stats">
       <h3>Statistiques (dernier mois)</h3>
       <label for="metricSelect">Métrique :</label>
