@@ -1,4 +1,4 @@
-# projet-sportif
+# projet-suivi-sportif
 
 Nom des membres du groupe:
   - Hamad AL-HUMAIDI
